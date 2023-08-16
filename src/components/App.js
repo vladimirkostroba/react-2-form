@@ -1,23 +1,37 @@
 import React, {Component} from "react";
+import { nanoid } from 'nanoid'
 import FormEditor from "./Form/FormEditor";
 import Layout from "./Layout/Layout";
+import ContactList from "./ContactList/ContactList";
 
 class App extends Component{
 
   state = {
     contacts : [],
+    filter:'',
   }
 
-  addName = () => {
-    this.setState()
+  addContact = ({text,number}) => {
+
+    const contact = {
+      id:nanoid(),
+      text,
+      number,
+    }
+
+    this.setState(prevState => {
+      return{
+        contacts:[...prevState.contacts,contact],
+      }
+    })
   }
 
   render(){
+    const {contacts} = this.state;
    return(
     <Layout>
-      <FormEditor onAddName={this.addName}>
-
-      </FormEditor>
+      <FormEditor onAddContact={this.addContact}/>
+      <ContactList contacts={contacts} />
     </Layout>
    )
   }
