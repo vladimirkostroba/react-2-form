@@ -1,6 +1,12 @@
 import React, {Component} from "react";
+import PropTypes from 'prop-types';
+
 
 class FormEditor extends Component{
+    static propTypes = {
+        onAddContact:PropTypes.func.isRequired,
+    };
+
     state = {
         text:'',
         number:'',
@@ -31,7 +37,6 @@ class FormEditor extends Component{
         return (
             <form className="formEditor" onSubmit={this.handleSubmit}>
                <label className="formEditor-label">
-                Name
                 <input 
                 className=""
                 type="text"
@@ -41,10 +46,12 @@ class FormEditor extends Component{
                 onChange={this.handleChangeName}
                 
                 ></input>
+                Name
                </label>
 
+               <br></br>
+
                <label className="formEditor-label">
-                Phone Number
                 <input 
                 className=""
                 type="number"
@@ -54,10 +61,13 @@ class FormEditor extends Component{
                 onChange={this.handleChangeNumber}
                 
                 ></input>
+                Phone Number
                </label>
 
+               <br></br>
+
                
-               <button type="submit">Add contact</button>
+               <button type="submit" className="btn-new">Add contact</button>
             </form>
         )
     }

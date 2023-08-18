@@ -10,21 +10,8 @@ class App extends Component{
   state = {
     contacts : [],
     filter:'',
-    
   }
 
-  // return{
-  //   contacts:prevState.contacts.map(contact => {
-  //     if(contact.id === contactId){
-  //       return {
-  //         ...contact,
-  //         compleeted: !contact.compleeted
-  //       }
-  //     }
-
-  //     return contact;
-  //   })
-  // }
 
   addContact = ({text,number}) => {
 
@@ -82,39 +69,17 @@ class App extends Component{
       contact.text.toLowerCase().includes(filter.toLowerCase())))
   }
 
-  // Complleted ПЕРЕДАТЬ ПРАВИЛЬНЫЙ ПРОПС
- 
-
-  updateContact = contactId => {
-    console.log('hello');
-    console.log(contactId);
-
-    this.setState(prevState => {
-      return{
-        contacts:prevState.contacts.map(contact => {
-          if(contact.id === contactId){
-            return {
-              ...contact,
-              compleeted: !contact.compleeted
-            }
-          }
-    
-          return contact;
-        })
-      }
-    })
-  }
 
 
   render(){
-    const {compleeted,filter} = this.state;
+    const {filter} = this.state;
     const wisibleContacts = this.getWisibleContacts();
 
    return(
     <Layout>
       <FormEditor onAddContact={this.addContact}/>
 
-      {wisibleContacts.length >= 1 && (
+      {wisibleContacts.length > 1 && (
           <Filter value={filter} onChangeFilter={this.handleChangeFilter} />
         )}
   
@@ -123,7 +88,7 @@ class App extends Component{
         contacts={wisibleContacts} 
         onRemoveContact={this.removeContact} 
         onUpdate={this.updateContact}
-        compleeted={compleeted}/>
+        />
       )}
     </Layout>
    )
